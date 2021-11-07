@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
-let globalID = 0;
+let globalId = 0;
 
 function App() {
-  const [task, setTask] = useState("");
+  const [task, setTasks] = useState("");
   const [todos, setTodos] = useState([]);
 
   function createTodo(e) {
     e.preventDefault();
     setTodos((oldTodos) => {
-      setTask("");
-      return [...oldTodos, { todo: task, id: globalID++ }];
+      setTasks("");
+      return [...oldTodos, { todo: task, id: globalId++ }];
     });
   }
 
@@ -20,20 +20,24 @@ function App() {
 
   return (
     <div>
-      <h1> Best Todo App</h1>
+      <h1>Best To Do App Ever</h1>
       <form onSubmit={createTodo}>
         <input
           type="text"
           value={task}
-          onChange={(e) => setTask(e.target.value)}
+          onChange={(event) => {
+            setTasks(event.target.value);
+          }}
         />
         <button type="submit">Create Todo</button>
       </form>
+
       <ul>
         {todos.map((item, index) => {
           return (
             <div key={item.id}>
               <li>
+                {" "}
                 {item.todo}({item.id})
               </li>
               <button onClick={() => deleteItem(item.id)}>Delete</button>
@@ -44,5 +48,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
