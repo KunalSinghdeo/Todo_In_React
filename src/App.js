@@ -1,9 +1,30 @@
+import React, { useState } from "react";
+
 function App() {
+  const [task, setTask] = useState("");
+  const [todos, setTodos] = useState([]);
+
+  function createTodo() {
+    setTodos((oldTodos) => {
+      return [...oldTodos, task];
+    });
+  }
+
   return (
     <div>
       <h1> Best Todo App</h1>
-      <input type="text" />
-      <button>Create Todo</button>
+      <input
+        type="text"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      />
+      <button onClick={createTodo}>Create Todo</button>
+
+      <ul>
+        {todos.map((todo, index) => {
+          return <li>{todo}</li>;
+        })}
+      </ul>
     </div>
   );
 }
